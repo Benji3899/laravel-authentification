@@ -25,7 +25,7 @@
         @error('name')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="text" class="form-control" name="name" class="@error('name') is-invalid @enderror"/>
+        <input type="text" name="name" class="@error('name') is-invalid @enderror form-control"/>
     </div>
 
     <div class="form-group">
@@ -33,7 +33,7 @@
         @error('email')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="text" class="form-control" name="email" class="@error('email') is-invalid @enderror"/>
+        <input type="text" name="email" class="@error('email') is-invalid @enderror form-control"/>
     </div>
 
     <div class="form-group">
@@ -41,7 +41,7 @@
         @error('password')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="password" class="form-control" name="password" class="@error('password') is-invalid @enderror" />
+        <input type="password" name="password" class="@error('password') is-invalid @enderror form-control" />
 
     </div>
 
@@ -55,7 +55,7 @@
         @error('birthdate')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <input type="date" class="form-control" name="birthdate" class="@error('birthdate') is-invalid @enderror" />
+        <input type="date" name="birthdate" class="@error('birthdate') is-invalid @enderror form-control" />
     </div>
     <button type="submit" class="btn btn-primary">Valider</button>
 </form>

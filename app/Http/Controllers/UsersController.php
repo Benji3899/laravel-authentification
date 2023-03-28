@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Database\Console\Migrations\ResetCommand;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -14,18 +16,22 @@ $users = User::all();
 return view('users.index', ['users' => $users]); // -> resources/views/users/index.blade.php
     }
 
+    protected function redirectTo(Request $request): string
+    {
+        return route('login');
+    }
     public function create()
     {
         return view('users.create'); // -> resources/views/users/create.blade.php
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         // Validation for required fields (and using some regex to validate our numeric value)
         $validated = $request->validate([
             'name'=>'required',
             'email'=>'required',
-            'password' => 'required|confirmed|min:5',
+            'password' => 'required|confirmed|min:5', (Hash::make($request->newPassword)),
             'birthdate'=>'required'
         ]);
 
@@ -44,13 +50,15 @@ return view('users.show', ['user' => $user]);
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+
+
+    public function update(Request $request, $id): RedirectResponse
     {
         // Validation for required fields (and using some regex to validate our numeric value)
         $validated = $request->validate([
             'name'=>'required',
             'email'=>'required',
-            'password' => 'required|confirmed|min:5',
+            'password' => 'required|confirmed|min:5', (Hash::make($request->newPassword)),
             'birthdate'=>'required'
         ]);
 
@@ -65,5 +73,3 @@ return view('users.show', ['user' => $user]);
         return redirect()->route('users.index')->with('message', 'Utilisateur supprimé');
     }
 }
-
-
