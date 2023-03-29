@@ -15,8 +15,7 @@ class CheckUserHasRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        // if($request->user()->role == $role) return $next($request);
-if ($request->user()->roles()->where('name',$role)->exists()) return $next($request);
+if ($request->user()->role == $role) return $next($request);
         abort(403);
     }
 }

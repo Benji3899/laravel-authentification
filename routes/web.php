@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
+
 
 
 /*
@@ -18,7 +21,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-Route::get('/', [UsersController::class, 'index']);
+Route::get('/', [PodcastController::class, 'index']);
 
 Route::get('login', function () {
     return 'login';
@@ -28,6 +31,7 @@ Route::get('users', function (){
     $users = User::all();
     return view('users', ['users' => $users]);
 });
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -41,26 +45,22 @@ Route::middleware('auth')->group(function () {
 // ROUTING
 // https://laravel.com/docs/10.x/socialite#routing
 Route::get('/auth/redirect', function () {
-    return Socialite::driver('microsoft')->redirect();
-});
+    return Socialite::driver('azure')->redirect();
+})->name('azure.redirect');
 
-Route::get('/auth/callback', function () {
-    $user = Socialite::driver('microsoft')->user();
-
-    // $user->token
-});
 
 // Authentification et stockage microsoft
+// https://laravel.com/docs/10.x/socialite#authentication-and-storage
 Route::get('/auth/callback', function () {
-    $githubUser = Socialite::driver('microsoft')->user();
+    $azureUser = Socialite::driver('azure')->user();
 
     $user = User::updateOrCreate([
-        'github_id' => $githubUser->id,
+        'email' => $azureUser->email,
     ], [
-        'name' => $githubUser->name,
-        'email' => $githubUser->email,
-        'github_token' => $githubUser->token,
-        'github_refresh_token' => $githubUser->refreshToken,
+        'name' => $azureUser->name,
+        'email' => $azureUser->email,
+        'azure_token' => $azureUser->token,
+        'azure_refresh_token' => $azureUser->refreshToken,
     ]);
 
     Auth::login($user);
@@ -68,7 +68,7 @@ Route::get('/auth/callback', function () {
     return redirect('/dashboard');
 });
 
-// admin
+// admin verif page
 Route::middleware(['auth', 'role:admin'])->group(function (){
     Route::get('/private', function (){
         return 'Bonjour admin';
@@ -78,6 +78,8 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
 
 
 // ajouté ->middleware('auth') avant le ; pour forcer la connexion si l'utilisateur n'est pas connecter
-Route::resource('users', UsersController::class);
+//Route::resource('users', UsersController::class);
+
+Route::resource('podcasts', PodcastController::class);
 
 require __DIR__.'/auth.php';
