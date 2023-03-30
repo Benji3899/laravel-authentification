@@ -75,11 +75,9 @@ Route::middleware(['auth', 'role:admin'])->group(function (){
     });
 });
 
-
+//Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts')->middleware('auth');
 
 // ajouté ->middleware('auth') avant le ; pour forcer la connexion si l'utilisateur n'est pas connecter
-//Route::resource('users', UsersController::class);
-
-Route::resource('podcasts', PodcastController::class);
+Route::resource('podcasts', PodcastController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

@@ -30,20 +30,8 @@
         </div>
     @endif
 
-    <h1>Les podcasts:</h1>
-    @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-    @endif
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-
+    <h1>Les podcasts</h1>
     <div>
         <ul>
             @foreach($podcasts as $podcast)
@@ -51,6 +39,8 @@
             @endforeach
         </ul>
     </div>
+
+
 
 </div>
 </body>
