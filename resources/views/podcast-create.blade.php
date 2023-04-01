@@ -18,15 +18,8 @@
         @enderror
         <input type="text" class="form-control" id="name" name="name"/>
     </div>
-{{--    --}}
-{{--    <div class="form-group">--}}
-{{--        <label for="podcast_img">Image</label>--}}
-{{--        @error('podcast_img')--}}
-{{--        <div class="alert alert-danger">{{ $message }}</div>--}}
-{{--        @enderror--}}
-{{--        <input type="image" class="form-control" id="podcast_img" name="podcast_img"/>--}}
-{{--    </div>--}}
-{{--    --}}
+
+
     <div class="form-group">
         <label for="description">Description</label>
         @error('description')
@@ -36,11 +29,20 @@
     </div>
 
     <div class="form-group">
-        <label for="podcast_file">Insérer votre fichier Podcast</label>
+        <label for="podcast_file">Votre podcast</label>
         @error('podcast_file')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <input type="file" id="file" class="form-control" name="podcast_file" />
+    </div>
+
+
+    <div class="form-group">
+        <label for="podcast_img">Votre couverture</label>
+        @error('podcast_img')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <input type="file" class="form-control" id="podcast_img" name="podcast_img"/>
     </div>
 
     <button type="submit" class="btn btn-primary">Publier</button>

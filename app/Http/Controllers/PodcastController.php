@@ -16,11 +16,11 @@ class PodcastController extends Controller
         return view('index', ['podcasts' => $podcasts]);
     }
 
-//    public function UserPodcasts()
-//    {
-//        $podcasts = Podcast::where('user_id', auth()->user()->id)->get();
-//        return view('user-podcast', ['podcasts' => $podcasts]);
-//    }
+    public function UserPodcasts()
+    {
+        $podcasts = Podcast::where('user_id', auth()->user()->id)->get();
+        return view('my-podcasts', ['podcasts' => $podcasts]);
+    }
 
     public function show(Podcast $podcast)
     {
@@ -38,13 +38,13 @@ class PodcastController extends Controller
             'name'=>'required',
             'description'=>'required',
             'podcast_file' => 'required|file',
-//        'podcast_img' => 'required|image',
+            'podcast_img' => 'required|image',
         ]);
         $podcast_url = $request->file('podcast_file')->store('podcasts');
 
-//        $podcast_img = $request->file('podcast_img')->store('podcasts');
+        $podcast_img = $request->file('podcast_img')->store('podcasts');
 
-        $podcast = auth()->user()->podcasts()->create([...$validated, 'url_podcast' => $podcast_url]);
+        $podcast = auth()->user()->podcasts()->create([...$validated, 'url_podcast' => $podcast_url, 'img_podcast' => $podcast_img ]);
 
         return redirect()->route('podcasts.show', $podcast);
     }

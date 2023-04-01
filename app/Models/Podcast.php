@@ -15,7 +15,7 @@ class Podcast extends Model
         'name',
         'description',
         'url_podcast',
-//        'img_podcast',
+        'img_podcast',
     ];
 
     public function user(): BelongsTo

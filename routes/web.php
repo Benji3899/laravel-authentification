@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -68,16 +69,10 @@ Route::get('/auth/callback', function () {
     return redirect('/dashboard');
 });
 
-// admin verif page
-Route::middleware(['auth', 'role:admin'])->group(function (){
-    Route::get('/private', function (){
-        return 'Bonjour admin';
-    });
-});
-
-//Route::get('/my-podcasts', [PodcastController::class, 'MyPodcasts'])->name('podcasts.my_podcasts')->middleware('auth');
+Route::get('/my-podcasts', [PodcastController::class, 'Userpodcasts'])->name('podcasts.my-podcasts')->middleware('auth');
 
 // ajouté ->middleware('auth') avant le ; pour forcer la connexion si l'utilisateur n'est pas connecter
 Route::resource('podcasts', PodcastController::class)->middleware('auth');
+Route::resource('users', UserController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
