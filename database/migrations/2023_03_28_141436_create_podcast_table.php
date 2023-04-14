@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('podcasts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string ('name');
+            $table->string ('title');
             $table->string('description');
             $table->string('url_podcast');
             $table->string('img_podcast')->nullable();

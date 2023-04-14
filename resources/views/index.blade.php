@@ -31,11 +31,11 @@
     @endif
 
 
-    <h1>Les podcasts</h1>
+    <h1>Liste des podcasteurs</h1>
     <div>
         <ul>
-            @foreach($podcasts as $podcast)
-                <li><a href="{{ route('podcasts.show', $podcast) }}">{{$podcast->name}}</a></li>
+            @foreach($users as $user)
+                <li><a href="{{ route('podcasts.show', $user) }}">{{$user->name}}</a></li>
             @endforeach
         </ul>
     </div>

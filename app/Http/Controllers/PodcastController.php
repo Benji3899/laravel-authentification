@@ -10,11 +10,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PodcastController extends Controller
 {
-    public function index()
-    {
-        $podcasts = Podcast::all();
-        return view('index', ['podcasts' => $podcasts]);
-    }
+//    public function index()
+//    {
+//        $podcasts = Podcast::all();
+//        return view('index', ['podcasts' => $podcasts]);
+//    }
 
     public function UserPodcasts()
     {
@@ -35,7 +35,7 @@ class PodcastController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'=>'required',
+            'title'=>'required',
             'description'=>'required',
             'podcast_file' => 'required|file',
             'podcast_img' => 'required|image',

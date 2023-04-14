@@ -3,7 +3,6 @@
 use App\Http\Controllers\PodcastController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use Laravel\Socialite\Facades\Socialite;
@@ -22,16 +21,16 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', [PodcastController::class, 'index']);
+Route::get('/', [UserController::class, 'index']);
 
-Route::get('login', function () {
-    return 'login';
-})->name('login');
+//Route::get('login', function () {
+//    return 'login';
+//})->name('login');
 
-Route::get('users', function (){
-    $users = User::all();
-    return view('users', ['users' => $users]);
-});
+//Route::get('users', function (){
+//    $users = User::all();
+//    return view('users', ['users' => $users]);
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -25,10 +25,10 @@
                 <li>
                     @if ($podcast->url_image)
                         <img
-                            src="{{ Storage::url($podcast->url_image) }}" alt="{{ $podcast->name }}">
+                            src="{{ Storage::url($podcast->url_image) }}" alt="{{ $podcast->title }}">
                     @endif
 
-                    <a href="{{ route('podcasts.show', $podcast) }}">{{ $podcast->name }}</a>
+                    <a href="{{ route('podcasts.show', $podcast) }}">{{ $podcast->title }}</a>
 
                     @if ($podcast->podcast)
                         <audio controls>
